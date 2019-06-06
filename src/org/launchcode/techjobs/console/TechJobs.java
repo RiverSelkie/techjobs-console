@@ -11,7 +11,7 @@ public class TechJobs {
 
     private static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
@@ -58,10 +58,11 @@ public class TechJobs {
 
                 // What is their search term?
                 System.out.println("\nSearch term: ");
-                String searchTerm = in.nextLine();
+                String searchTerm = in.nextLine().toLowerCase();
 
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                    printJobs(JobData.findByValue(searchTerm));
+//                    System.out.println("Search all fields not yet implemented.");
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
@@ -103,14 +104,28 @@ public class TechJobs {
                 validChoice = true;
             }
 
-        } while(!validChoice);
+        } while (!validChoice);
 
         return choiceKeys[choiceIdx];
     }
 
-    // Print a list of jobs
+    //     Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        int size;
+        if (someJobs == null) {
+            size = 0;
+        } else {
+            size = someJobs.size();
+        }
+        if (size < 1) {
+            System.out.println("Sorry, there are no jobs that fit this criterion.");
 
-        System.out.println("printJobs is not implemented yet");
+        } else {
+
+            for (HashMap<String, String> Cheesepuff : someJobs) {
+                System.out.println(String.format(String.valueOf(Cheesepuff)));
+                System.out.println("****************************");
+            }
+        }
     }
 }
